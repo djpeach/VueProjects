@@ -1,0 +1,75 @@
+.btn-warning,
+.btn-warning:disabled,
+.btn-warning:hover {
+    color: white;
+}
+
+.btn-warning:disabled {
+    background-color: #ffc107c4;
+}
+
+.btn-primary:disabled {
+    background-color: #007bff98;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    padding-top: 50px;
+}
+
+.healthBar {
+    height: 40px;
+    border: 1px solid #aaa;
+    background-color: rgba(220, 20, 60, 0.15);
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+}
+
+.healthBar .currentHealth {
+    text-align: left;
+    display: inline-block;
+    height: inherit;
+    font-size: 1.3rem;
+    padding-top: 3px;
+    font-weight: 400;
+    color: white;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #32CD32;
+}
+
+.controlBar {
+    height: 55px;
+    border: 1px solid #aaa;
+    background-color:#eee;
+    margin: 30px;
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+    padding-top: 7px;
+}
+
+.actionLog {
+    border-radius: 4px;
+    max-height: 50vh;
+    margin: 0 30px;
+}
+
+.actionLog .card-body {
+    overflow:auto; 
+    display:flex; 
+    flex-direction:column-reverse;
+}
+
+.actionLog .card-body li {
+    list-style: none;
+}
+
+.actionLog .card-body li:not(:last-of-type) {
+    margin-bottom: 8px;
+}

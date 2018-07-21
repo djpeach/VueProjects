@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+  <link rel="stylesheet" href="style.css">
+
+  <title>Monster Slayer</title>
+</head>
+
+<body>
+  <div id="app">
+    <div class="container text-center">
+
+      <div class="row">
+        <div class="col">
+          <h1>Monster Slayer</h1>
+        </div>
+      </div>
+
+      <div class="row justify-content-around">
+        <div class="col-4">
+          <h3>Your Health:</h3>
+          <p class="my-0 text-left">{{ playerHealth }} / 100</p>
+          <div class="healthBar"><span class="currentHealth" :style="{width : playerHealth + '%'}"></span></div>
+        </div>
+        <div class="col-4">
+          <h3>Monster Health:</h3>
+          <p class="my-0 text-left">{{ monsterHealth }} / 100</p>
+          <div class="healthBar"><span class="currentHealth" :style="{width : monsterHealth + '%'}"></span></div>
+        </div>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-10">
+          <div class="controlBar justify-content-center">
+            <template v-if="showNewGameControls">
+              <button class="btn btn-success px-5" @click="startNewGame">New Game</button>
+            </template>
+            <template v-else>
+              <button class="btn btn-success" @click="playerAttack">Attack</button>
+              <button :disabled="attackCount < 4" class="btn btn-warning" @click="playerSpecialAttack">Special Attack</button>
+              <button :disabled="playerHealth > 50 || healCount < 1" class="btn btn-primary" @click="healPlayer">Heal ({{ healCount }} / 3)</button>
+              <button class="btn btn-danger" @click="playerSurrender">Surrender</button>
+            </template>
+          </div>
+        </div>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-10">
+          <div class="card actionLog">
+            <div class="card-header">
+              <h4>Action Log</h4>
+            </div>
+            <div class="card-body">
+              <ul>
+                <li v-for="log in actionLog" class="p-1 rounded" :class="log.class">
+                  <div v-if="log.actionTaken == 'attacked'">The {{ log.entity }} attacked the Player, dealing {{ log.actionValue }} damage.</div>
+                  <div v-if="log.actionTaken == 'attack'">The {{ log.entity }} attacked the Monster, dealing {{ log.actionValue }} damage.</div>
+                  <div v-if="log.actionTaken == 'specialAttack'">The {{ log.entity }} launched a Special Attack on the Monster, dealing {{ log.actionValue }} damage.</div>
+                  <div v-if="log.actionTaken == 'heal'">The {{ log.entity }} performed a heal, gaining {{ log.actionValue }} health.</div>
+                </li>
+              </ul>
+            </div>
+            <div class="card-footer text-muted">
+              <span class="alert-warning p-2 rounded">Special Attacks Used: {{ hmSpecialAttacks }}</span>
+              <span class="alert-success p-2 rounded">Total Damage Dealt: {{ damageDealt }}</span>
+              <span class="alert-danger p-2 rounded">Total Damage Taken: {{ damageTaken }}</span>
+              <span class="alert-primary p-2 rounded">Heals Used: {{ healsUsed }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="app.js"></script>
+</body>
+
+</html>
